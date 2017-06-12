@@ -3,11 +3,10 @@
 	'use strict';
 
 	const app = require('./app');
-	//const debug = require('debug')('herman-express:server');
 	const http = require('http');
 	const swaggerConfig = require('./config/swagger-config.js');
 
-	const port = normalizePort(process.env.PORT || '3000');
+	const port = normalizePort(process.env.PORT || '3002');
 	app.set('port', port);
 
 	swaggerConfig.init(app, function(){

@@ -2,19 +2,26 @@
   "swagger": "2.0",
   "info": {
     "title": "API's",
-    "description": "Connected Car API's",
+    "description": "College Virtual Assistent API's",
     "version": "1.0"
   },
   "produces": ["application/json"],  
-  "host": "connected-car-api.mybluemix.net",
+  "host": "college-assitent.mybluemix.net",
   "basePath": "/",
   "paths": {
-		"/auth/custom": {
+ 
+	 "/api/v1/college/add": {
 		  "post": {
-			"x-swagger-router-controller": "custom-auth",
-			"operationId": "login",
-			"tags": ["Auth"],
-			"description": "Authenticate the user.",   
+			"x-swagger-router-controller": "college",
+			"operationId": "add",
+			"tags": ["Colleges"],
+			"description": "Add a new college to database",   
+			"consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
 			"parameters": [
 			  {
 				"name": "access_token",
@@ -22,7 +29,16 @@
 				"description": "Access token",
 				"required": true,
 				"type": "string"
-			  }
+			  },  
+			  {
+				"name": "body",
+                "in": "body",               
+                "description": "addition of new college needs the info of college",
+                "required": true,
+                "schema": {
+                            "$ref": "#/definitions/College"
+                }
+              }
 			],		
 			"responses": {
 			  "default": {
@@ -34,185 +50,75 @@
 			  "200": {
 				"description": "Successful request.",
 				"schema": {
-				  "type": "array",
-				  "$ref": "#/definitions/Token"
+				    "$ref": "#/definitions/Success"
 				}
 			  }
 			}
 		  }
 	  },
-	  "/auth/facebook/token": {
-		  "post": {
-			"x-swagger-router-controller": "social-auth",
-			"operationId": "facebookLogin",
-			"tags": ["Auth"],
-			"description": "Authenticate the user by facebook token.",   
-			"parameters": [
-			  {
-				"name": "access_token",
-				"in": "header",
-				"description": "Access token",
-				"required": true,
-				"type": "string"
-			  }
-			],		
-			"responses": {
-			  "default": {
-				"description": "Invalid request.",
-				"schema": {
-				  "$ref": "#/definitions/Error"
-				}
-			  },
-			  "200": {
-				"description": "Successful request.",
-				"schema": {
-				  "type": "array",
-				  "$ref": "#/definitions/Token"
-				}
-			  }
-			}
-		  }
-	  },
-	  "/auth/google/token": {
-		  "post": {
-			"x-swagger-router-controller": "social-auth",
-			"operationId": "googleLogin",
-			"tags": ["Auth"],
-			"description": "Authenticate the user by google token.",   
-			"parameters": [
-			  {
-				"name": "access_token",
-				"in": "header",
-				"description": "Access token",
-				"required": true,
-				"type": "string"
-			  }
-			],		
-			"responses": {
-			  "default": {
-				"description": "Invalid request.",
-				"schema": {
-				  "$ref": "#/definitions/Error"
-				}
-			  },
-			  "200": {
-				"description": "Successful request.",
-				"schema": {
-				  "type": "array",
-				  "$ref": "#/definitions/Token"
-				}
-			  }
-			}
-		  }
-	  },
-	  "/auth/google/token/id": {
-		  "post": {
-			"x-swagger-router-controller": "social-auth",
-			"operationId": "googleIdLogin",
-			"tags": ["Auth"],
-			"description": "Authenticate the user by google id token.",   
-			"parameters": [
-			  {
-				"name": "access_token",
-				"in": "header",
-				"description": "Access token",
-				"required": true,
-				"type": "string"
-			  }
-			],		
-			"responses": {
-			  "default": {
-				"description": "Invalid request.",
-				"schema": {
-				  "$ref": "#/definitions/Error"
-				}
-			  },
-			  "200": {
-				"description": "Successful request.",
-				"schema": {
-				  "type": "array",
-				  "$ref": "#/definitions/Token"
-				}
-			  }
-			}
-		  }
-	  }
-  },
-  "definitions": {
-	"Token": {
-		"properties": {
-			"token": {
-				"type": "string"
-			},
-			"expires": {
-				"type": "number"
-			},
-			"user": {
-				"$ref": "#/definitions/User" 
-			}
-		}
-	},
-
-	"IDS": {
-	  "properties": {
-        "id": {
-          "type": "number"
-        }        
+	  	  "/api/v1/college/all": {
+      "get": {
+        "x-swagger-router-controller": "college",
+        "operationId": "getAll",
+        "tags": ["Colleges"],
+        "description": "Returns all colleges",   
+		"parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "type": "string"
+          }
+        ],		
+        "responses": {
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              
+              "$ref": "#/definitions/Colleges"
+            }
+          }
+        }
       }
-    },
-
-
-	
-	"Users": {
+    }
+  },
+  
+  "definitions": {
+	"Colleges": {
       "properties": {        
         "data": {
           "type": "array",
           "items": {            
-            "$ref": "#/definitions/User" 
+            "$ref": "#/definitions/College" 
           }        
         }
       }
-    },
-    "User": {
-	  "properties": {
-        "username": {
-          "type": "string"
+    },		
+	"College": {
+            "type": "object",
+            "properties": {
+                
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                }
+            }
         },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        }
-      }
-    },
-	"IdToken": {
-      "properties": {
-        "access_token": {                   
-           "type": "string"                    
-         }
-      }
-    },
-	"Test": {
-      "properties": {
-        "username": {                   
-           "type": "string"                    
-         },
-         "password": {                   
-           "type":"string"                    
-         }
-         
-      }
-    },
-
-	"UserInfo": {
-		"properties":{
-			"username": {
-				"type": "string"
-			}		
-		}
-	},
-	
 	"Error": {
       "properties": {
         "message": {

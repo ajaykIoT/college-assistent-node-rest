@@ -1,10 +1,10 @@
 applications:
 - path: .
-  memory: 512M
+  memory: 256M
   instances: 1
   domain: mybluemix.net
-  name: college-assistent-node-rest
-  host: college-assistent-node-rest
+  name: college-assistent-rest
+  host: college-assistent-rest
   disk_quota: 1024M
   services:
-  - 
+  - college-assistent-rest-cloudantNoSQLDB
