@@ -4,9 +4,22 @@ var dbClient = require('.././cloudantDB');
 
 var college = {
 
-  create:function(req, res, next)
+  addCollege:function(req, res, next)
   {
-      	dbClient.insertData('college',data).then(function (response) {
+		var name = req.body.name;
+		var type = req.body.type;
+		var city = req.body.city;
+		var state = req.body.state;
+	  
+		var collegedata = {college:{
+			  college_name: name,
+			  college_type: type,
+			  city: city,
+			  state: state
+			}
+		}
+	  
+      	dbClient.insertData('college',collegedata).then(function (response) {
 			if(response)
 			{	
 				console.log("record inserted to college");
@@ -28,26 +41,14 @@ var college = {
 
  
 var data = 
-{college:[
+{college:
 {
   name: 'indira college',
   type: 'technical',
   city: 'pune',
   state: 'MH'
-}, 
-{
-  name: 'LNCT',
-  type: 'technical',
-  city: 'bhopal',
-  state: 'MP'
-},
-{
-  name: 'MANIT',
-  type: 'technical',
-  city: 'bhopal',
-  state: 'MP'
 }
-]};
+};
 
 
 module.exports = college;
