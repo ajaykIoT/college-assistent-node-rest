@@ -8,7 +8,7 @@ var college = {
 	});
   },
   add: function(req, res) {
-    collegeModels.add(req, res, function(err, result) {
+    collegeModels.create(req, res, function(err, result) {
 		helper.sendResponse(res, err, result); 
 	});
   }  

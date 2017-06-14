@@ -1,1 +1,1 @@
-module.exports = require('./cloudantHelper.js')
+module.exports = require('./cloudant.js');

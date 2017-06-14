@@ -1,17 +1,34 @@
 
+
+var dbClient = require('../cloudantDB');
+
 var college = {
- 
-	add: function(req, res, next){
-		var allcollege = data; // Spoof a DB call
-		next(null, "{ added colege to db }");
-	},
+
+  create:function(req, res, next)
+  {
+      	dbClient.insertData('college',data).then(function (response) {
+			if(response)
+			{	
+				console.log("record inserted to college");
+				next(null, response);
+			}
+		})
+  
+  },
 	getAll: function(req, res, next) {
-		var allcollege = data; // Spoof a DB call
-		next(null, allcollege);
+		dbClient.retrieveData('college').then(function (response) {
+		if(response)
+		{	
+			console.log("record retrieved");
+			next(null, response);
+		}
+		})
 	}
 };
+
  
-var data = [
+var data = 
+{college:[
 {
   name: 'indira college',
   type: 'technical',
@@ -30,6 +47,7 @@ var data = [
   city: 'bhopal',
   state: 'MP'
 }
-];
+]};
+
 
 module.exports = college;
