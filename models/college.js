@@ -1,6 +1,6 @@
 
 
-var dbClient = require('../cloudantDB');
+var dbClient = require('.././cloudantDB');
 
 var college = {
 

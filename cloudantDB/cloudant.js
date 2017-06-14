@@ -3,8 +3,10 @@ var extend = require('util')._extend;
 var vcapServices = require('vcap_services');
 var Q = require('q');
 var config = extend({
-    username: '8a344213-580d-4aae-99c1-515dec9c88c5-bluemix', //process.env.cloudant_username,
-    password: '34fe387372733b0c60ca2d1c9e4277dd4852e3d4f53bbac334b9ae83f87b9b30'//process.env.cloudant_password
+    username: process.env.cloudant_username,
+	//'8a344213-580d-4aae-99c1-515dec9c88c5-bluemix', 
+    password: process.env.cloudant_password
+	//'34fe387372733b0c60ca2d1c9e4277dd4852e3d4f53bbac334b9ae83f87b9b30'
 	
 }, vcapServices.getCredentials('cloudantNoSQLDB'));
 
