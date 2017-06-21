@@ -1,4 +1,4 @@
-(function(appConfig) {
+(function (appConfig) {
 
   'use strict';
 
@@ -12,7 +12,7 @@
   // *** load environment variables *** //
   require('dotenv').config();
 
-  appConfig.init = function(app, express) {
+  appConfig.init = function (app, express) {
 
     // *** view engine *** //
     app.set('view engine', 'html');
@@ -22,21 +22,25 @@
       app.use(morgan('dev'));
     }
 
-	// *** cross domain requests *** //
-    const allowCrossDomain = function(req, res, next) {
+    // *** cross domain requests *** //
+    const allowCrossDomain = function (req, res, next) {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-	  // Set custom headers for CORS
-      res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, access_token');
-      next();
+      // Set custom headers for CORS
+      res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      // intercept OPTIONS method
+      if ('OPTIONS' == req.method) {
+        res.sendStatus(200);
+      }
+      else {
+        next();
+      }
     };
 
     app.use(allowCrossDomain);
     app.use(cookieParser());
-	app.use(bodyParser.json());
+    app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
-	
-
     app.use(flash());
 
   };

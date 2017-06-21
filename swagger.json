@@ -5,72 +5,44 @@
     "description": "College Virtual Assistent API's",
     "version": "1.0"
   },
-  "produces": ["application/json"],  
+  "produces": [
+    "application/json"
+  ],
   "host": "college-assitent.mybluemix.net",
   "basePath": "/",
   "paths": {
- 
-	 "/api/v1/college/add": {
-		  "post": {
-			"x-swagger-router-controller": "college",
-			"operationId": "add",
-			"tags": ["Colleges"],
-			"description": "Add a new college to database",   
-			"consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-			"parameters": [
-			  {
-				"name": "access_token",
-				"in": "header",
-				"description": "Access token",
-				"required": true,
-				"type": "string"
-			  },  
-			  {
-				"name": "body",
-                "in": "body",               
-                "description": "addition of new college needs the info of college",
-                "required": true,
-                "schema": {
-                            "$ref": "#/definitions/College"
-                }
-              }
-			],		
-			"responses": {
-			  "default": {
-				"description": "Invalid request.",
-				"schema": {
-				  "$ref": "#/definitions/Error"
-				}
-			  },
-			  "200": {
-				"description": "Successful request.",
-				"schema": {
-				    "$ref": "#/definitions/Success"
-				}
-			  }
-			}
-		  }
-	  },
-	  	  "/api/v1/college/all": {
-      "get": {
+    "/api/v1/college/add": {
+      "post": {
         "x-swagger-router-controller": "college",
-        "operationId": "getAll",
-        "tags": ["Colleges"],
-        "description": "Returns all colleges",   
-		"parameters": [
+        "operationId": "add",
+        "tags": [
+          "Colleges"
+        ],
+        "description": "Add a new college to database",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
           {
             "name": "access_token",
             "in": "header",
             "description": "Access token",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "addition of new college needs the info of college",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/College"
+            }
           }
-        ],		
+        ],
         "responses": {
           "default": {
             "description": "Invalid request.",
@@ -81,59 +53,413 @@
           "200": {
             "description": "Successful request.",
             "schema": {
-              
+              "$ref": "#/definitions/Success"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/college/all": {
+      "get": {
+        "x-swagger-router-controller": "college",
+        "operationId": "getAll",
+        "tags": [
+          "Colleges"
+        ],
+        "description": "Returns all colleges",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
               "$ref": "#/definitions/Colleges"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/course/add": {
+      "post": {
+        "x-swagger-router-controller": "course",
+        "operationId": "add",
+        "tags": [
+          "Courses"
+        ],
+        "description": "Add a new course to database",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "addition of new course needs the info of course",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Course"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/Success"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/course/all": {
+      "get": {
+        "x-swagger-router-controller": "course",
+        "operationId": "getAll",
+        "tags": [
+          "Courses"
+        ],
+        "description": "Returns all Courses",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "Access token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/Courses"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wcs/message": {
+      "post": {
+        "x-swagger-router-controller": "conversation",
+        "operationId": "postQuery",
+        "tags": [
+          "WCS Service"
+        ],
+        "description": "Post a question and get response",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "Access token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Post a question with context and get answer from service",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Payload"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/Success"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wcs/updateEntity": {
+      "post": {
+        "x-swagger-router-controller": "conversation",
+        "operationId": "updateEntity",
+        "tags": [
+          "WCS Service"
+        ],
+        "description": "Replace and old entity with new entity values.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Post a question with context and get answer from service",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateEnt"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/Success"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wcs/updateEntityFromCloudant": {
+      "post": {
+        "x-swagger-router-controller": "conversation",
+        "operationId": "updateEntityFromCloudant",
+        "tags": [
+          "WCS Service"
+        ],
+        "description": "Replace and old entity with new entity values from cloudant Database.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Post a question with context and get answer from service",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityDetails"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Invalid request.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "$ref": "#/definitions/Success"
             }
           }
         }
       }
     }
   },
-  
   "definitions": {
-	"Colleges": {
-      "properties": {        
+    "Colleges": {
+      "properties": {
         "data": {
           "type": "array",
-          "items": {            
-            "$ref": "#/definitions/College" 
-          }        
+          "items": {
+            "$ref": "#/definitions/College"
+          }
         }
       }
-    },		
-	"College": {
-            "type": "object",
-            "properties": {
-                
-                "name": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "city": {
-                    "type": "string"
-                },
-                "state": {
-                    "type": "string"
-                }
-            }
-        },
-	"Error": {
-      "properties": {
-        "message": {
-          "type": "string"
-        }
-      },
-      "required": ["message"]
     },
-	"Success": {
+    "College": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "Courses": {
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Course"
+          }
+        }
+      }
+    },
+    "Course": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "FullName": {
+          "type": "string"
+        },
+        "Synonyms": {
+          "type": "string"
+        }
+      }
+    },
+    "Payload": {
+      "type": "object",
+      "properties": {
+        "inputMessage": {
+          "type": "string"
+        },
+        "context": {
+          "type": "object"
+        }
+      }
+    },
+    "updateEnt": {
+      "type": "object",
+      "properties": {
+        "entityName": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SingleEntity"
+          }
+        }
+      }
+    },
+    "SingleEntity": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EntityDetails": {
+      "type": "object",
+      "required": [ "dbName","entityName","EntityFieldMap" ],
+      "properties": {
+        "dbName": {
+          "type": "string",
+          "description":"dbname from which data will be fetched."          
+        },
+        "entityName": {
+          "type": "string",
+          "description":"Entity Name which you want to update from db. It must me already present in WCS"  
+        },
+        "EntityFieldMap": {
+          "type": "object",
+           "required": [ "Name","synonyms" ],
+          "properties": {
+            "Name": {
+              "type": "string"
+            },
+            "synonyms": {
+              "type": "string"
+            }
+          }
+        }
+      }      
+    },
+    "Error": {
       "properties": {
         "message": {
           "type": "string"
         }
       },
-      "required": ["message"]
+      "required": [
+        "message"
+      ]
+    },
+    "Success": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ]
     }
   }
 }
