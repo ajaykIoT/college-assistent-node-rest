@@ -7,8 +7,8 @@ var dbClient = require('.././cloudantDB');
 var conversation = new Conversation({
     // If unspecified here, the CONVERSATION_USERNAME and CONVERSATION_PASSWORD env properties will be checked
     // After that, the SDK will fall back to the bluemix-provided VCAP_SERVICES environment property
-    username: '0c957585-bd9d-4f14-9376-36b8e174a4a7',
-    password: 'Cla2QlwaJOII',
+    username: 'a2c24cbe-2290-4712-87a2-24be9010c9ab',
+    password: 'pZgmRMRg25EE',
     url: 'https://gateway.watsonplatform.net/conversation/api',
     version_date: Conversation.VERSION_DATE_2017_04_21
 });
